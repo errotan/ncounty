@@ -25,17 +25,17 @@ final class SerializedObjectCsvParser
     /**
      * @var string
      */
-    private $baseObjectName;
+    private $baseClassName;
 
     /**
      * @var string
      */
     private $csvContent;
 
-    public function __construct(string $csvPath, string $baseObjectName)
+    public function __construct(string $csvPath, string $baseClassName)
     {
         $this->csvPath = $csvPath;
-        $this->baseObjectName = $baseObjectName;
+        $this->baseClassName = $baseClassName;
     }
 
     /**
@@ -65,6 +65,6 @@ final class SerializedObjectCsvParser
         $normalizers = [new ArrayDenormalizer(), new GetSetMethodNormalizer()];
         $serializer = new Serializer($normalizers, $encoders);
 
-        return $serializer->deserialize($this->csvContent, $this->baseObjectName.'[]', 'csv');
+        return $serializer->deserialize($this->csvContent, $this->baseClassName.'[]', 'csv');
     }
 }
