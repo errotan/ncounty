@@ -1,0 +1,11 @@
+App\Entity\City:
+    properties:
+        name:
+            - Length:
+                min: 2
+
+App\Entity\County:
+    properties:
+        name:
+            - Length:
+                min: 2
