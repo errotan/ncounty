@@ -10,7 +10,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="Application\Repository\CityRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\CityRepository")
  */
 class City
 {
