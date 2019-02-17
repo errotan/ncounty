@@ -40,6 +40,13 @@ class CityController extends AbstractFOSRestController implements ClassResourceI
         $this->validator = $validator;
     }
 
+    private function successResponse(): Response
+    {
+        $view = $this->view(['success' => true]);
+
+        return $this->handleView($view);
+    }
+
     /**
      * @Get("/cities/county/{countyId}",name="get_city_county",requirements={"countyId"="\d+"})
      */
@@ -69,9 +76,7 @@ class CityController extends AbstractFOSRestController implements ClassResourceI
     {
         (new CityCreateService($request, $this->em, $this->validator))->save();
 
-        $view = $this->view(['success' => true]);
-
-        return $this->handleView($view);
+        return $this->successResponse();
     }
 
     /**
@@ -81,9 +86,7 @@ class CityController extends AbstractFOSRestController implements ClassResourceI
     {
         (new CityUpdateService($request, $this->em, $this->validator))->save();
 
-        $view = $this->view(['success' => true]);
-
-        return $this->handleView($view);
+        return $this->successResponse();
     }
 
     /**
@@ -93,8 +96,6 @@ class CityController extends AbstractFOSRestController implements ClassResourceI
     {
         (new CityDeleteService($request, $this->em))->delete();
 
-        $view = $this->view(['success' => true]);
-
-        return $this->handleView($view);
+        return $this->successResponse();
     }
 }
