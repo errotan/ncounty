@@ -8,6 +8,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CountyRepository")
@@ -25,6 +26,9 @@ class County
 
     /**
      * @var string
+     *
+     * @Assert\NotNull
+     * @Assert\Length(min=2)
      *
      * @ORM\Column(type="string",nullable=false)
      */

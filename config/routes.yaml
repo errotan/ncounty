@@ -4,3 +4,9 @@
 index:
     path: /
     defaults: { _controller: 'App\Controller\DefaultController::indexAction' }
+city:
+    type:     rest
+    resource: App\Controller\CityController
+county:
+    type:     rest
+    resource: App\Controller\CountyController
