@@ -1,0 +1,31 @@
+{
+    "name": "ztest",
+    "description": "County and city registry application.",
+    "version": "0.1.0",
+    "author": {
+        "name": "Puskás Zsolt",
+        "email": "errotan@gmail.com"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/errotan/ztest.git"
+    },
+    "devDependencies": {
+        "@babel/preset-react": "^7.0.0",
+        "@symfony/webpack-encore": "^0.22.0",
+        "bootstrap": "^4.3.1",
+        "jquery": "^3.3.1",
+        "popper.js": "^1.14.7",
+        "prop-types": "^15.7.2",
+        "react": "^16.8.2",
+        "react-dom": "^16.8.2",
+        "webpack-notifier": "^1.6.0"
+    },
+    "license": "MIT",
+    "scripts": {
+        "dev-server": "encore dev-server",
+        "dev": "encore dev",
+        "watch": "encore dev --watch",
+        "build": "encore production --progress"
+    }
+}
