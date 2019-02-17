@@ -15,6 +15,7 @@ class Main extends Component {
         };
 
         this.handleCountyChange = this.handleCountyChange.bind(this);
+        this.handleCreateCity = this.handleCreateCity.bind(this);
     }
 
     componentDidMount() {
@@ -66,17 +67,29 @@ class Main extends Component {
         });
     }
 
+    handleCreateCity(event) {
+        event.preventDefault();
+        const env = this;
+        const selectedCountyId = env.state.selectedCountyId;
+        const newCountyName = $('#newCountyName');
+
+        $.post('/cities', {countyId: selectedCountyId, name: newCountyName.val()}, function() {
+            newCountyName.val('');
+            env.loadCities();
+            alert('Sikeres mentés!');
+        }).fail(function(jqXHR) {
+            alert(jqXHR.responseJSON.error.text);
+        });
+    }
+
     render() {
         return (
             <div className="container mt-4">
                 <div className="row no-gutters">
                     <div className="col"></div>
                     <div className="col-4">
-                        <County counties={this.state.counties}
-                        handleCountyChange={this.handleCountyChange}
-                        handleCreateCity={this.handleCreateCity}
-                        />
-                        {this.state.selectedCountyId > 0 && <NewCity />}
+                        <County counties={this.state.counties} handleCountyChange={this.handleCountyChange} />
+                        {this.state.selectedCountyId > 0 && <NewCity handleCreateCity={this.handleCreateCity} />}
                     </div>
                     <div className="col-6">
                         {this.state.selectedCountyId > 0 &&
