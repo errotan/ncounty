@@ -10,6 +10,7 @@ namespace App\Controller;
 use App\Entity\County;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
+use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Routing\ClassResourceInterface;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -29,6 +30,16 @@ class CountyController extends AbstractFOSRestController implements ClassResourc
     {
         $counties = $this->em->getRepository(County::class)->findAll();
         $view = $this->view($counties);
+
+        return $this->handleView($view);
+    }
+
+    /**
+     * @Get("/counties/{id}",name="get_county",requirements={"id"="\d+"})
+     */
+    public function getAction(County $county): Response
+    {
+        $view = $this->view($county);
 
         return $this->handleView($view);
     }
