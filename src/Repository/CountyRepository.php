@@ -15,4 +15,8 @@ namespace App\Repository;
  */
 class CountyRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findAll()
+    {
+        return $this->findBy([], ['name' => 'ASC']);
+    }
 }

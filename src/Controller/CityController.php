@@ -52,7 +52,7 @@ class CityController extends AbstractFOSRestController implements ClassResourceI
      */
     public function getCountyAction(int $countyId): Response
     {
-        $cities = $this->em->getRepository(City::class)->findBy(['county' => $countyId]);
+        $cities = $this->em->getRepository(City::class)->findBy(['county' => $countyId], ['name' => 'ASC']);
         $view = $this->view($cities);
 
         return $this->handleView($view);
