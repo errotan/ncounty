@@ -11,11 +11,16 @@ class Main extends Component {
             counties: [],
             countyName: null,
             cities: [],
+            editedCityId: null,
             selectedCountyId: null
         };
 
         this.handleCountyChange = this.handleCountyChange.bind(this);
         this.handleCreateCity = this.handleCreateCity.bind(this);
+        this.handleCityClick = this.handleCityClick.bind(this);
+        this.handleCityDelete = this.handleCityDelete.bind(this);
+        this.handleCancel = this.handleCancel.bind(this);
+        this.handleCityUpdate = this.handleCityUpdate.bind(this);
     }
 
     componentDidMount() {
@@ -71,12 +76,65 @@ class Main extends Component {
         event.preventDefault();
         const env = this;
         const selectedCountyId = env.state.selectedCountyId;
-        const newCountyName = $('#newCountyName');
+        const newCityName = $('#newCityName');
 
-        $.post('/cities', {countyId: selectedCountyId, name: newCountyName.val()}, function() {
-            newCountyName.val('');
+        $.post('/cities', {countyId: selectedCountyId, name: newCityName.val()}, function() {
+            newCityName.val('');
             env.loadCities();
             alert('Sikeres mentés!');
+        }).fail(function(jqXHR) {
+            alert(jqXHR.responseJSON.error.text);
+        });
+    }
+
+    handleCityClick(cityId) {
+        const state = this.state;
+        state.editedCityId = cityId;
+        this.setState({ state });
+    }
+
+    handleCityDelete(event) {
+        event.preventDefault();
+        const env = this;
+        const cityId = this.state.editedCityId;
+
+        $.ajax({
+            url: '/cities/' + cityId,
+            type: 'DELETE'
+        }).done(function() {
+            env.loadCities();
+            alert('Sikeres törlés!');
+        }).fail(function() {
+            alert('Törlés sikertelen! Már törölve?');
+        });
+    }
+
+    handleCancel(event) {
+        event.preventDefault();
+        this.clearEdited();
+        this.loadCities();
+    }
+
+    clearEdited() {
+        const state = this.state;
+        state.editedCityId = null;
+        this.setState({ state });
+    }
+
+    handleCityUpdate(event) {
+        event.preventDefault();
+        const env = this;
+        const cityId = this.state.editedCityId;
+        const cityName = $('#editCityName').val();
+
+        $.ajax({
+            url: '/cities/' + cityId,
+            data: {name: cityName},
+            type: 'PUT',
+        }).done(function() {
+            env.clearEdited();
+            env.loadCities();
+            alert('Sikeres módosítás!');
         }).fail(function(jqXHR) {
             alert(jqXHR.responseJSON.error.text);
         });
@@ -93,7 +151,10 @@ class Main extends Component {
                     </div>
                     <div className="col-6">
                         {this.state.selectedCountyId > 0 &&
-                        <CityLister cities={this.state.cities} countyName={this.state.countyName} />}
+                        <CityLister cities={this.state.cities} countyName={this.state.countyName}
+                        editedCityId={this.state.editedCityId} handleCityClick={this.handleCityClick}
+                        handleCityDelete={this.handleCityDelete} handleCancel={this.handleCancel}
+                        handleCityUpdate={this.handleCityUpdate} />}
                     </div>
                     <div className="col"></div>
                 </div>

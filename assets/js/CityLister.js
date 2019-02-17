@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import CityEditor from './CityEditor';
 
 class CityLister extends Component {
     render() {
@@ -7,7 +8,12 @@ class CityLister extends Component {
                 <h5>Megye: <small className="text-muted">{this.props.countyName}</small></h5>
                 <h5 className="mb-3">Települések:</h5>
                 {this.props.cities.map(
-                    city => <p className="text-muted" key={city.id}>{city.name}</p>
+                    (city) => this.props.editedCityId === city.id
+                        ? <CityEditor city={city} key={city.id} handleCityDelete={this.props.handleCityDelete}
+                            handleCancel={this.props.handleCancel} handleCityUpdate={this.props.handleCityUpdate} />
+                        : <p className="text-muted" onClick={() => this.props.handleCityClick(city.id)} key={city.id}>
+                            {city.name}
+                        </p>
                 )}
                 {0 === this.props.cities.length && <p>Nincs rögzítve település!</p>}
             </div>
