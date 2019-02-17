@@ -20,6 +20,6 @@ final class CityUpdateService extends AbstractSaveService
             throw new BadRequestHttpException('Invalid city id specified!');
         }
 
-        $this->entity->setName($this->request->request->get('name'));
+        $this->entity->setName(htmlspecialchars($this->request->request->get('name'))); // TODO: remove script tag only
     }
 }
