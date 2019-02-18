@@ -34,10 +34,16 @@ class CityController extends AbstractFOSRestController implements ClassResourceI
      */
     protected $validator;
 
-    public function __construct(EntityManagerInterface $em, ValidatorInterface $validator)
+    /**
+     * @var \HTMLPurifier
+     */
+    protected $purifier;
+
+    public function __construct(EntityManagerInterface $em, ValidatorInterface $validator, \HTMLPurifier $purifier)
     {
         $this->em = $em;
         $this->validator = $validator;
+        $this->purifier = $purifier;
     }
 
     private function successResponse(): Response
@@ -74,7 +80,7 @@ class CityController extends AbstractFOSRestController implements ClassResourceI
      */
     public function postAction(Request $request): Response
     {
-        (new CityCreateService($request, $this->em, $this->validator))->save();
+        (new CityCreateService($request, $this->em, $this->validator, $this->purifier))->save();
 
         return $this->successResponse();
     }
@@ -84,7 +90,7 @@ class CityController extends AbstractFOSRestController implements ClassResourceI
      */
     public function putAction(Request $request, int $id): Response
     {
-        (new CityUpdateService($request, $this->em, $this->validator))->save();
+        (new CityUpdateService($request, $this->em, $this->validator, $this->purifier))->save();
 
         return $this->successResponse();
     }

@@ -9,6 +9,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "doctrine/doctrine-fixtures-bundle": "^3.1",
+        "exercise/htmlpurifier-bundle": "^2.0",
         "friendsofsymfony/rest-bundle": "^2.5",
         "sensio/framework-extra-bundle": "^5.1",
         "symfony/asset": "3.4.*",

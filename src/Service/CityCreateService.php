@@ -16,7 +16,7 @@ final class CityCreateService extends AbstractSaveService
     protected function prepare(): void
     {
         $this->entity = new City();
-        $this->entity->setName(htmlspecialchars($this->request->request->get('name'))); // TODO: remove script tag only
+        $this->entity->setName($this->purifier->purify($this->request->request->get('name')));
 
         $county = $this->em->getRepository(County::class)->find($this->request->request->get('countyId'));
 

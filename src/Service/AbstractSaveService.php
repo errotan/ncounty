@@ -30,15 +30,21 @@ abstract class AbstractSaveService
     protected $validator;
 
     /**
+     * @var \HTMLPurifier
+     */
+    protected $purifier;
+
+    /**
      * @var Object
      */
     protected $entity;
 
-    public function __construct(Request $request, EntityManagerInterface $em, ValidatorInterface $validator)
+    public function __construct(Request $request, EntityManagerInterface $em, ValidatorInterface $validator, \HTMLPurifier $purifier)
     {
         $this->request = $request;
         $this->em = $em;
         $this->validator = $validator;
+        $this->purifier = $purifier;
     }
 
     public function save()
