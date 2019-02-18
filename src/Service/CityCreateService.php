@@ -11,7 +11,7 @@ use App\Entity\City;
 use App\Entity\County;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
-final class CityCreateService extends AbstractSaveService
+final class CityCreateService extends AbstractEntitySaveService
 {
     protected function prepare(): void
     {

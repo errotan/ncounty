@@ -10,7 +10,7 @@ namespace App\Service;
 use App\Entity\City;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
-final class CityDeleteService extends AbstractDeleteService
+final class CityDeleteService extends AbstractEntityDeleteService
 {
     protected function load(): void
     {

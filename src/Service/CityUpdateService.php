@@ -10,7 +10,7 @@ namespace App\Service;
 use App\Entity\City;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
-final class CityUpdateService extends AbstractSaveService
+final class CityUpdateService extends AbstractEntitySaveService
 {
     protected function prepare(): void
     {

@@ -10,7 +10,7 @@ namespace App\Service;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-abstract class AbstractDeleteService
+abstract class AbstractEntityDeleteService
 {
     /**
      * @var Request
