@@ -1,6 +1,3 @@
-Ztest
-=====
-
 ## County and city registry application
 
 #### Installation steps
