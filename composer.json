@@ -1,11 +1,11 @@
 {
-    "name": "errotan/ztest",
+    "name": "errotan/ncounty",
     "description": "County and city registry application.",
     "version": "0.1.0",
     "type": "project",
     "license": "MIT",
     "require": {
-        "php": "^7.1.3",
+        "php": "^7.2.9",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "doctrine/doctrine-fixtures-bundle": "^3.1",
